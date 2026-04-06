@@ -12,18 +12,28 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #a1c4fd, #c2a1ff);
-  font-family: 'Georgia', serif;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* CONTENEDOR */
+.wrapper {
+  text-align: center;
+  position: relative;
 }
 
 /* SOBRE */
 .envelope {
   position: relative;
-  width: 320px;
-  height: 200px;
+  width: 90vw;
+  max-width: 380px;
+  height: 220px;
   background: #6a5acd;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  overflow: hidden;
+  z-index: 2;
 }
 
 /* TAPA */
@@ -32,36 +42,35 @@ body {
   width: 100%;
   height: 100%;
   background: #7b68ee;
-  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  clip-path: polygon(0 0, 100% 0, 50% 65%);
   transform-origin: top;
-  transition: 0.8s;
+  transition: 0.6s ease;
+  z-index: 3;
 }
 
 /* CARTA */
 .letter {
   position: absolute;
-  width: 90%;
-  height: 90%;
-  background: #fffaf5;
-  top: 5%;
-  left: 5%;
-  border-radius: 10px;
+  width: 92%;
+  left: 4%;
+  top: 100%;
+  background: #fff;
+  border-radius: 12px;
   padding: 25px;
   box-sizing: border-box;
-  transform: translateY(0);
-  transition: 0.8s;
-  overflow: auto;
+  transition: 0.6s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 /* TEXTO */
 h1 {
-  font-size: 28px;
+  font-size: 24px;
   color: #6a5acd;
   margin-bottom: 15px;
 }
 
 p {
-  font-size: 18px;
+  font-size: 17px;
   color: #444;
   line-height: 1.6;
 }
@@ -72,56 +81,90 @@ p {
 }
 
 .open .letter {
-  transform: translateY(-180px);
+  top: -120px;
 }
 
+/* TEXTO ABAJO */
 .hint {
-  position: absolute;
-  bottom: -30px;
-  width: 100%;
-  text-align: center;
+  margin-top: 15px;
   color: white;
   font-size: 14px;
+  opacity: 0.8;
+}
+
+/* CONFETI */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 8px;
+  height: 14px;
+  opacity: 0.8;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope" onclick="openLetter(this)">
-  <div class="flap"></div>
+<div class="wrapper">
+  <div class="envelope" onclick="openLetter(this)">
+    <div class="flap"></div>
 
-  <div class="letter">
-    <h1>Feliz Cumpleaños Valerie 🎉</h1>
+    <div class="letter">
+      <h1>Feliz Cumpleaños Valerie 🎉</h1>
 
-    <p>
-      Hoy no es un día cualquiera… hoy celebramos tus 22 años y todo lo increíble que eres.
-    </p>
+      <p>Hoy celebramos tus 22 años y todo lo increíble que eres.</p>
 
-    <p>
-      Eres una persona con una fuerza y un enfoque que inspiran.  
-      Todo el esfuerzo que pones en tu vida personal, laboral y educativa
-      no pasa desapercibido… está construyendo algo grande.
-    </p>
+      <p>
+        Tu esfuerzo, tu enfoque y tu disciplina te están llevando lejos.
+        Todo lo que haces está construyendo algo grande.
+      </p>
 
-    <p>
-      Que la vida te premie con cosas hermosas,  
-      que cada meta que persigas se convierta en logro  
-      y que nunca te falten razones para sonreír.
-    </p>
+      <p>
+        Que la vida te premie con cosas hermosas,  
+        que cada meta se convierta en logro  
+        y que nunca te falten razones para sonreír.
+      </p>
 
-    <p>
-      Sigue siendo esa persona increíble que eres.  
-      Lo mejor de tu historia apenas comienza 💜
-    </p>
+      <p>
+        Sigue brillando, porque lo mejor apenas comienza 💜
+      </p>
+    </div>
   </div>
 
-  <div class="hint">Haz clic para abrir 💌</div>
+  <div class="hint">Toca el sobre para abrir 💌</div>
 </div>
 
 <script>
 function openLetter(el) {
   el.classList.toggle("open");
+  lanzarConfeti();
+}
+
+function lanzarConfeti() {
+  for (let i = 0; i < 60; i++) {
+    let confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background = coloresRandom();
+    confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 5000);
+  }
+}
+
+function coloresRandom() {
+  const colores = ["#6a5acd", "#8360c3", "#a1c4fd", "#ffffff", "#c2a1ff"];
+  return colores[Math.floor(Math.random() * colores.length)];
 }
 </script>
 
