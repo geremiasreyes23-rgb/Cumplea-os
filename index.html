@@ -2,140 +2,126 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>La Historia de Valerie 💜</title>
+<title>Carta para Valerie 💜</title>
 
 <style>
 body {
   margin: 0;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(135deg, #a1c4fd, #c2a1ff);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  background: linear-gradient(135deg, #a1c4fd, #c2a1ff);
+  font-family: 'Georgia', serif;
 }
 
-.book {
-  width: 80%;
-  max-width: 800px;
-  height: 500px;
-  background: #fffaf5;
-  border-radius: 15px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-  padding: 40px;
+/* SOBRE */
+.envelope {
   position: relative;
-  overflow: hidden;
+  width: 320px;
+  height: 200px;
+  background: #6a5acd;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 
-.page {
+/* TAPA */
+.flap {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.8s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  background: #7b68ee;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  transform-origin: top;
+  transition: 0.8s;
 }
 
-.page.active {
-  opacity: 1;
-  transform: translateX(0);
+/* CARTA */
+.letter {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background: #fffaf5;
+  top: 5%;
+  left: 5%;
+  border-radius: 10px;
+  padding: 25px;
+  box-sizing: border-box;
+  transform: translateY(0);
+  transition: 0.8s;
+  overflow: auto;
 }
 
-.page.exit {
-  opacity: 0;
-  transform: translateX(-50px);
-}
-
+/* TEXTO */
 h1 {
+  font-size: 28px;
   color: #6a5acd;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 p {
-  font-size: 1.2em;
+  font-size: 18px;
   color: #444;
+  line-height: 1.6;
 }
 
-button {
+/* ABIERTO */
+.open .flap {
+  transform: rotateX(180deg);
+}
+
+.open .letter {
+  transform: translateY(-180px);
+}
+
+.hint {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background: #6a5acd;
+  bottom: -30px;
+  width: 100%;
+  text-align: center;
   color: white;
-  cursor: pointer;
-  transition: 0.3s;
+  font-size: 14px;
 }
-
-button:hover {
-  transform: scale(1.1);
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="book">
+<div class="envelope" onclick="openLetter(this)">
+  <div class="flap"></div>
 
-  <div class="page active">
-    <h1>🌌 Había una vez...</h1>
-    <p>En un mundo donde los sueños aún se estaban escribiendo, nació alguien especial… alguien con una luz única llamada Valerie ✨</p>
+  <div class="letter">
+    <h1>Feliz Cumpleaños Valerie 🎉</h1>
+
+    <p>
+      Hoy no es un día cualquiera… hoy celebramos tus 22 años y todo lo increíble que eres.
+    </p>
+
+    <p>
+      Eres una persona con una fuerza y un enfoque que inspiran.  
+      Todo el esfuerzo que pones en tu vida personal, laboral y educativa
+      no pasa desapercibido… está construyendo algo grande.
+    </p>
+
+    <p>
+      Que la vida te premie con cosas hermosas,  
+      que cada meta que persigas se convierta en logro  
+      y que nunca te falten razones para sonreír.
+    </p>
+
+    <p>
+      Sigue siendo esa persona increíble que eres.  
+      Lo mejor de tu historia apenas comienza 💜
+    </p>
   </div>
 
-  <div class="page">
-    <h1>💫 Una luz diferente</h1>
-    <p>Desde pequeña, Valerie mostró algo especial… una mezcla de determinación, dulzura y una fuerza silenciosa que la hacía destacar 💙</p>
-  </div>
-
-  <div class="page">
-    <h1>🚀 El crecimiento</h1>
-    <p>Con el tiempo, esa luz creció… enfrentó retos, aprendió, evolucionó y construyó una versión de sí misma cada vez más fuerte y enfocada 💼📚</p>
-  </div>
-
-  <div class="page">
-    <h1>🌸 Hoy</h1>
-    <p>Hoy no es cualquier día… hoy el mundo celebra sus 22 años, celebrando no solo su vida, sino todo lo que ha logrado 🌷</p>
-  </div>
-
-  <div class="page">
-    <h1>🎁 Un deseo</h1>
-    <p>Que la vida te premie con cosas increíbles, que cada esfuerzo tenga su recompensa y que cada meta se convierta en realidad ✨</p>
-  </div>
-
-  <div class="page">
-    <h1>💜 Final (pero no realmente)</h1>
-    <p>Porque esta historia apenas comienza… y lo mejor está por venir. Feliz cumpleaños Valerie 🎉 Sigue brillando siempre 💜</p>
-  </div>
-
-  <button onclick="nextPage()">Pasar página ➡️</button>
-
+  <div class="hint">Haz clic para abrir 💌</div>
 </div>
 
 <script>
-let current = 0;
-const pages = document.querySelectorAll(".page");
-
-function nextPage() {
-  if (current < pages.length - 1) {
-    pages[current].classList.remove("active");
-    pages[current].classList.add("exit");
-
-    current++;
-
-    pages[current].classList.add("active");
-  } else {
-    document.querySelector("button").style.display = "none";
-  }
+function openLetter(el) {
+  el.classList.toggle("open");
 }
 </script>
 
