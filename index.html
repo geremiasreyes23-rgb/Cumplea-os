@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>La Historia de Valerie 💜</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #a1c4fd, #c2a1ff);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 800px;
+  text-align: center;
+  padding: 30px;
+  animation: fadeIn 2s ease;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.text {
+  font-size: 1.3em;
+  margin-top: 20px;
+  min-height: 120px;
+  animation: fadeInUp 1s ease;
+}
+
+button {
+  margin-top: 30px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #6a5acd;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes fadeInUp {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="title">🌟 Un pequeño cuento 🌟</h1>
+  <div class="text" id="story"></div>
+  <button onclick="nextScene()">Siguiente ➡️</button>
+</div>
+
+<script>
+const scenes = [
+  {
+    title: "🌌 Había una vez...",
+    text: "En un mundo donde los sueños aún se estaban escribiendo, nació alguien especial… alguien con una luz única llamada Valerie ✨"
+  },
+  {
+    title: "💫 Una luz diferente",
+    text: "Desde pequeña, Valerie mostró algo especial… una mezcla de determinación, dulzura y una fuerza silenciosa que la hacía destacar 💙"
+  },
+  {
+    title: "🚀 El crecimiento",
+    text: "Con el tiempo, esa luz creció… enfrentó retos, aprendió, evolucionó y construyó una versión de sí misma cada vez más fuerte y enfocada 💼📚"
+  },
+  {
+    title: "🌸 Hoy",
+    text: "Hoy no es cualquier día… hoy el mundo celebra sus 22 años, celebrando no solo su vida, sino todo lo que ha logrado 🌷"
+  },
+  {
+    title: "🎁 Un deseo",
+    text: "Que la vida te premie con cosas increíbles, que cada esfuerzo tenga su recompensa y que cada meta se convierta en realidad ✨"
+  },
+  {
+    title: "💜 Final (pero no realmente)",
+    text: "Porque esta historia apenas comienza… y lo mejor está por venir. Feliz cumpleaños Valerie 🎉 Sigue brillando siempre 💜"
+  }
+];
+
+let index = 0;
+
+function nextScene() {
+  const story = document.getElementById("story");
+  const title = document.getElementById("title");
+
+  index++;
+
+  if(index < scenes.length){
+    title.innerText = scenes[index].title;
+    story.innerText = scenes[index].text;
+  } else {
+    document.querySelector("button").style.display = "none";
+  }
+}
+
+// inicial
+document.getElementById("story").innerText = scenes[0].text;
+</script>
+
+</body>
+</html>
